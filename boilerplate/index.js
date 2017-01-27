@@ -1,7 +1,13 @@
 'use strict';
 const electron = require('electron');
 
+const path = require('path');
+
 const app = electron.app;
+
+const Tray = electron.Tray;
+
+const Menu = electron.Menu;
 
 // adds debug features like hotkeys for triggering dev tools and reload
 require('electron-debug')();
@@ -24,7 +30,7 @@ function createMainWindow() {
 	win.loadURL(`file://${__dirname}/index.html`);
 	win.on('closed', onClosed);
 
-	return win;
+  return win;
 }
 
 app.on('window-all-closed', () => {
@@ -41,4 +47,12 @@ app.on('activate', () => {
 
 app.on('ready', () => {
 	mainWindow = createMainWindow();
+	//
+  const tray = new Tray(path.join(__dirname, './icon.png'));
+  console.log('tray', tray);
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'show', click: function(){mainWindow.show()}},
+  ])
+  tray.setToolTip('This is my application.')
+  tray.setContextMenu(contextMenu)
 });
