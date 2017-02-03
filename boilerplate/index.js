@@ -53,7 +53,7 @@ app.on('ready', () => {
 	var imgPath = path.join(__dirname, './icon.png')
 	var img = require('electron').nativeImage.createFromPath(imgPath)
   //var tray = new Tray(img);
-	var tray = new Tray(nativeImage.createFromPath('/home/averissimo/work/apps/yakyak/app/icons/icon-unread.png'))
+	var tray = new Tray(nativeImage.createFromPath(imgPath))
 	console.log('tray', tray)
   const contextMenu = Menu.buildFromTemplate([
     {label: 'show', click: function(){mainWindow.show()}},
