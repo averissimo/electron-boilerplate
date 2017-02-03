@@ -5,6 +5,8 @@ const path = require('path');
 
 const app = electron.app;
 
+const nativeImage = electron.nativeImage;
+
 const Tray = electron.Tray;
 
 const Menu = electron.Menu;
@@ -48,11 +50,21 @@ app.on('activate', () => {
 app.on('ready', () => {
 	mainWindow = createMainWindow();
 	//
-  const tray = new Tray(path.join(__dirname, './icon.png'));
-  console.log('tray', tray);
+	var imgPath = path.join(__dirname, './icon.png')
+	var img = require('electron').nativeImage.createFromPath(imgPath)
+  //var tray = new Tray(img);
+	var tray = new Tray(nativeImage.createFromPath('/home/averissimo/work/apps/yakyak/app/icons/icon-unread.png'))
+	console.log('tray', tray)
   const contextMenu = Menu.buildFromTemplate([
     {label: 'show', click: function(){mainWindow.show()}},
-  ])
-  tray.setToolTip('This is my application.')
-  tray.setContextMenu(contextMenu)
+    {label: 'hide', click: function(){
+      mainWindow.restore();
+      mainWindow.hide();
+    }},
+    {role: 'minimize'}
+  ]);
+  tray.setToolTip('This is my application.');
+  tray.setContextMenu(contextMenu);
+
+	setInterval(function(){tray.setImage(imgPath)},1000);
 });
