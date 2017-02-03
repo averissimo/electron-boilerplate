@@ -51,8 +51,15 @@ app.on('ready', () => {
   const tray = new Tray(path.join(__dirname, './icon.png'));
   console.log('tray', tray);
   const contextMenu = Menu.buildFromTemplate([
-    {label: 'show', click: function(){mainWindow.show()}},
-  ])
-  tray.setToolTip('This is my application.')
-  tray.setContextMenu(contextMenu)
+    {label: 'Show', click: function(){mainWindow.show()}},
+    {label: 'Hide', click: function(){
+      mainWindow.restore();
+      mainWindow.hide();
+    }},
+    {role: 'minimize'},
+		{role: 'quit'}
+  ]);
+  tray.setToolTip('This is my application.');
+  tray.setContextMenu(contextMenu);
+
 });
