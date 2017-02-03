@@ -52,9 +52,8 @@ app.on('ready', () => {
 	//
 	var imgPath = path.join(__dirname, './icon.png')
 	var img = require('electron').nativeImage.createFromPath(imgPath)
-  //var tray = new Tray(img);
-	var tray = new Tray(nativeImage.createFromPath(imgPath))
-	console.log('tray', tray)
+  var tray = new Tray(imgPath);
+	// var tray = new Tray(nativeImage.createFromPath(imgPath))
   const contextMenu = Menu.buildFromTemplate([
     {label: 'show', click: function(){mainWindow.show()}},
     {label: 'hide', click: function(){
