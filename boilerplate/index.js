@@ -53,7 +53,7 @@ app.on('ready', () => {
   const contextMenu = Menu.buildFromTemplate([
     {label: 'Show', click: function(){mainWindow.show()}},
 		{label: 'Hide', click: function(){mainWindow.hide()}},
-    {role: 'minimize'},
+    {role: 'minimize'}
   ]);
   tray.setToolTip('This is my application.');
   tray.setContextMenu(contextMenu);
