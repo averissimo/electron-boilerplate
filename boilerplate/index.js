@@ -66,4 +66,5 @@ app.on('ready', () => {
   tray.setContextMenu(contextMenu);
 
 	setInterval(function(){tray.setImage(imgPath)},1000);
+	// setInterval(function(){tray.setImage(nativeImage.createFromPath(imgPath))},1000);
 });
